@@ -38,3 +38,47 @@ if(lightbox){
         }
     });
 }
+const langBtn = document.getElementById("langBtn");
+
+if(langBtn){
+
+    let currentLang =
+        localStorage.getItem("lang") || "zh";
+
+    switchLanguage(currentLang);
+
+    langBtn.addEventListener("click",()=>{
+
+        currentLang =
+            currentLang === "zh"
+            ? "ja"
+            : "zh";
+
+        localStorage.setItem(
+            "lang",
+            currentLang
+        );
+
+        switchLanguage(currentLang);
+
+    });
+
+    function switchLanguage(lang){
+
+        document
+        .querySelectorAll("[data-zh]")
+        .forEach(el=>{
+
+            el.textContent =
+                lang === "zh"
+                ? el.dataset.zh
+                : el.dataset.ja;
+
+        });
+
+        langBtn.textContent =
+            lang === "zh"
+            ? "日本語"
+            : "中文";
+    }
+}
