@@ -1,73 +1,167 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>lain レイン　ファン | 個人サイト</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>余白の記録</title>
 
-<link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-<header class="navbar">
-
-    <div class="logo">レイン</div>
-
-    <nav>
-
-        <a href=" "
-           data-zh="首页"
-           data-ja="ホーム">首页</a >
-
-        <a href="travel.html"
-           data-zh="相册"
-           data-ja="アルバム">相册</a >
-
-        <a href="about.html"
-           data-zh="关于"
-           data-ja="このサイトについて">关于</a >
-
-    </nav>
-
-    <button id="langBtn">日本語</button>
-
-</header>
-<section class="hero">
-
-    <h1
-    data-zh="记录日本"
-    data-ja="静かな日本">
-    </h1>
-
-    <p
-        114514
-    </p >
-
-</section>
-
-<section class="intro">
-
-    <div class="card">
-        <h2>关于</h2>
-
-        <p>
-            国境の長いトンネルを抜けると雪国であった。夜の底が白くなった。信号所に汽車が止まった。
-
-向側の座席から娘が立って来て、島村の前のガラス窓を落とした。雪の冷気が流れこんだ。娘は窓いっぱいに乗り出して、遠くへ呼ぶように、
-「駅長さあん、駅長さあん。」
-
-明りをさげてゆっくり雪を踏んで来た男は、襟巻で鼻の上まで包み、耳に帽子の毛皮を垂れていた。
-もうそんな寒さかと島村は外を眺めると、鉄道の官舎らしいバラックが山裾に寒々と散らばっているだけで、雪の色はそこまで行かぬうちに闇に呑まれていた。--------雪国
-        </p >
+    <!-- 縦書き装飾 -->
+    <div class="vertical-label">
+        記録
     </div>
 
-</section>
+    <!-- ナビゲーション -->
+    <header class="site-header fade-in">
+        <nav>
+            <a href=" ">トップ</a >
+            <a href="diary.html">日記</a >
+            <a href="album.html">アルバム</a >
+        </nav>
+    </header>
 
-<footer>
-    © 2026　Designed by レイン</footer>
+    <!-- ヒーロー -->
+    <main>
 
-<script src="js/script.js"></script>
+        <section class="hero fade-in">
+
+            <div class="hero-left">
+
+                <h1>
+                    余白の記録
+                </h1>
+
+                <p class="subtitle">
+                    日々の記録と写真
+                </p >
+
+            </div>
+
+            <div class="hero-right">
+
+                <a href="diary.html" class="menu-link">
+                    日記を見る
+                </a >
+
+                <a href="album.html" class="menu-link">
+                    アルバムを見る
+                </a >
+
+            </div>
+
+        </section>
+
+        <!-- 紹介 -->
+
+        <section class="intro fade-in">
+
+            <div class="section-mark">
+                About
+            </div>
+
+            <p>
+                この場所は日々の出来事や旅先で見つけた風景、
+                心に残った言葉を静かに記録するための小さなアーカイブです。
+            </p >
+
+            <p>
+                慌ただしい日常の中で見過ごしてしまうような余白や静寂を、
+                写真と言葉で残しています。
+            </p >
+
+        </section>
+
+        <!-- 最近の日記 -->
+
+        <section class="latest fade-in">
+
+            <div class="section-mark">
+                Diary
+            </div>
+
+            <article class="entry">
+
+                <div class="date">
+                    2026.06.21
+                </div>
+
+                <h2>
+                    雨の日の散歩
+                </h2>
+
+                <p>
+                    小雨の降る午後、静かな路地を歩きながら感じたことを記録しました。
+                </p >
+
+            </article>
+
+            <article class="entry">
+
+                <div class="date">
+                    2026.06.10
+                </div>
+
+                <h2>
+                    夏の始まり
+                </h2>
+
+                <p>
+                    少しずつ季節が移り変わっていく様子を眺めながら過ごした一日。
+                </p >
+
+            </article>
+
+        </section>
+
+        <!-- 写真プレビュー -->
+
+        <section class="preview fade-in">
+
+            <div class="section-mark">
+                Album
+            </div>
+
+            <div class="preview-grid">
+
+                <!-- 画像差し替え -->
+                <div class="photo-card">
+                    < img src="images/album/photo01.jpg" alt="">
+                </div>
+
+                <!-- 画像差し替え -->
+                <div class="photo-card">
+                    < img src="images/album/photo02.jpg" alt="">
+                </div>
+
+                <!-- 画像差し替え -->
+                <div class="photo-card">
+                    < img src="images/album/photo03.jpg" alt="">
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- フッター -->
+
+    <footer>
+        3688684104@qq.com
+    </footer>
+
+    <script src="js/main.js"></script>
 
 </body>
 </html>

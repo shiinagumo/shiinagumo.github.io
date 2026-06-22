@@ -1,316 +1,533 @@
-/* ===== 全局 ===== */
+/* =========================
+   余白の記録
+   Wabi-Sabi Theme
+========================= */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+:root {
+
+    --ivory: #f5f2ea;
+    --earth: #d8cdbd;
+    --stone: #b7aea2;
+    --ink: #56524d;
+    --charcoal: #3e3a36;
+
 }
 
-html{
-    scroll-behavior:smooth;
+/* =========================
+   Base
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body{
-
-    background:#f7f4ee;
-    color:#444;
-
-    font-family:
-    "Helvetica Neue",
-    "PingFang SC",
-    sans-serif;
-
-    line-height:1.9;
+html {
+    scroll-behavior: smooth;
 }
 
-/* ===== 导航 ===== */
+body {
 
-.navbar{
+    font-family: "Noto Sans JP", sans-serif;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    background: var(--ivory);
 
-    padding:28px 8%;
-    border-bottom:1px solid #d9cfc0;
+    color: var(--ink);
 
-    background:#f7f4ee;
+    line-height: 2.2;
 
-    position:sticky;
-    top:0;
-    z-index:999;
+    letter-spacing: 0.08em;
+
+    min-height: 100vh;
+
+    position: relative;
 }
 
-.logo{
+/* =========================
+   和紙テクスチャ
+========================= */
 
-    font-size:1.1rem;
-    letter-spacing:2px;
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background-image:
+        url("../images/texture/washi.jpg");
+
+    background-size: cover;
+
+    opacity: 0.05;
+
+    pointer-events: none;
+
+    z-index: -1;
 }
 
-nav a{
+/* =========================
+   Header
+========================= */
 
-    text-decoration:none;
-    color:#555;
+.site-header {
 
-    margin-left:28px;
+    width: 100%;
 
-    transition:0.3s;
+    padding-top: 3rem;
+
+    padding-left: 10vw;
+
+    padding-right: 10vw;
 }
 
-nav a:hover,
-nav a.active{
+.site-header nav {
 
-    color:#8d7762;
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 2.5rem;
 }
 
-/* ===== 首页 ===== */
+.site-header a {
 
-.hero{
+    text-decoration: none;
 
-    max-width:900px;
+    color: var(--ink);
 
-    margin:120px auto;
+    font-size: 1rem;
 
-    text-align:center;
-
-    padding:0 20px;
+    transition: opacity .3s ease;
 }
 
-.hero h1{
+.site-header a:hover {
 
-    font-size:2.4rem;
-    font-weight:300;
-
-    margin-bottom:25px;
+    opacity: .5;
 }
 
-.hero p{
+/* =========================
+   Vertical Label
+========================= */
 
-    color:#777;
+.vertical-label {
+
+    position: fixed;
+
+    left: 2rem;
+
+    top: 30%;
+
+    writing-mode: vertical-rl;
+
+    color: var(--stone);
+
+    letter-spacing: 0.5em;
+
+    font-size: .9rem;
+
+    z-index: 10;
 }
 
-.intro{
+/* =========================
+   Hero
+========================= */
 
-    max-width:900px;
-    margin:auto;
+.hero {
 
-    padding:0 20px 100px;
+    min-height: 78vh;
+
+    padding-left: 10vw;
+
+    padding-right: 10vw;
+
+    display: grid;
+
+    grid-template-columns: 2fr 1fr;
+
+    align-items: center;
+
+    gap: 5rem;
 }
 
-.card{
+.hero h1 {
 
-    background:#fbfaf7;
+    font-size: 6rem;
 
-    border:1px solid #e4dbcf;
+    font-weight: 300;
 
-    border-radius:10px;
+    line-height: 1.4;
 
-    padding:40px;
+    letter-spacing: .18em;
 }
 
-/* ===== 标题 ===== */
+.subtitle {
 
-.page-title{
+    margin-top: 2rem;
 
-    text-align:center;
-    margin:80px 0;
+    font-size: 1.2rem;
+
+    color: var(--stone);
 }
 
-.page-title h1{
+.hero-right {
 
-    font-weight:300;
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2rem;
+
+    align-items: flex-start;
 }
 
-/* ===== 瀑布流 ===== */
+.menu-link {
 
-.gallery{
+    text-decoration: none;
 
-    column-count:3;
-    column-gap:24px;
+    color: var(--charcoal);
 
-    width:90%;
-    max-width:1300px;
+    font-size: 1.1rem;
 
-    margin:auto;
+    padding-bottom: .5rem;
+
+    border-bottom: 1px solid var(--earth);
 }
 
-.gallery-item{
+.menu-link:hover {
 
-    break-inside:avoid;
-
-    margin-bottom:24px;
-
-    background:#fbfaf7;
-
-    border-radius:8px;
-
-    overflow:hidden;
-
-    border:1px solid #e8dfd4;
+    opacity: .6;
 }
 
-.gallery-item img{
+/* =========================
+   Content
+========================= */
 
-    width:100%;
+.intro,
+.latest,
+.preview,
+.page-title,
+.diary-entry {
 
-    display:block;
+    width: min(900px, 90%);
 
-    cursor:pointer;
+    margin-left: auto;
 
-    transition:0.4s;
+    margin-right: auto;
 }
 
-.gallery-item img:hover{
+.intro,
+.latest,
+.preview {
 
-    opacity:0.92;
+    padding-top: 8rem;
+
+    padding-bottom: 8rem;
 }
 
-.gallery-item p{
+.section-mark {
 
-    padding:14px 16px 20px;
+    color: var(--stone);
 
-    font-size:0.92rem;
-    color:#666;
+    margin-bottom: 3rem;
+
+    font-size: .9rem;
+
+    letter-spacing: .3em;
+
+    text-transform: uppercase;
 }
 
-/* ===== 关于 ===== */
+/* =========================
+   Diary Entry
+========================= */
 
-.about{
+.entry,
+.diary-entry {
 
-    max-width:900px;
+    padding-top: 3rem;
 
-    margin:100px auto;
+    padding-bottom: 3rem;
 
-    padding:0 20px;
+    border-bottom: 1px solid rgba(183,174,162,.35);
 }
 
-.about h1{
+.entry h2,
+.diary-entry h2 {
 
-    text-align:center;
-    margin-bottom:50px;
+    font-size: 2rem;
 
-    font-weight:300;
+    font-weight: 300;
+
+    margin-bottom: 1.2rem;
 }
 
-/* ===== 图片预览 ===== */
+.date,
+.entry-date {
 
-#lightbox{
+    color: var(--stone);
 
-    display:none;
-
-    position:fixed;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:100%;
-
-    background:rgba(0,0,0,0.92);
-
-    justify-content:center;
-    align-items:center;
-
-    z-index:9999;
+    margin-bottom: 1rem;
 }
 
-#previewImage{
+.diary-entry a {
 
-    max-width:90%;
-    max-height:90%;
+    display: inline-block;
+
+    margin-top: 1.5rem;
+
+    text-decoration: none;
+
+    color: var(--charcoal);
 }
 
-.close{
+/* =========================
+   Album Preview
+========================= */
 
-    position:absolute;
+.preview-grid {
 
-    top:20px;
-    right:35px;
+    display: grid;
 
-    color:white;
+    grid-template-columns: repeat(3,1fr);
 
-    font-size:40px;
-
-    cursor:pointer;
+    gap: 2rem;
 }
 
-/* ===== Footer ===== */
+.photo-card img {
 
-footer{
+    width: 100%;
 
-    text-align:center;
+    border-radius: 18px;
 
-    padding:60px 20px;
-
-    color:#999;
+    display: block;
 }
 
-/* ===== 平板 ===== */
+/* =========================
+   Album Page
+========================= */
 
-@media(max-width:900px){
+.album-page {
 
-    .gallery{
-        column-count:2;
+    padding-bottom: 10rem;
+}
+
+.page-title {
+
+    padding-top: 8rem;
+
+    padding-bottom: 6rem;
+}
+
+.page-title h1 {
+
+    font-size: 4rem;
+
+    font-weight: 300;
+
+    margin-bottom: 1rem;
+}
+
+.gallery {
+
+    width: min(1100px, 92%);
+
+    margin: 0 auto;
+
+    columns: 2;
+
+    column-gap: 4rem;
+}
+
+.gallery-item {
+
+    break-inside: avoid;
+
+    margin-bottom: 4rem;
+}
+
+.gallery-image {
+
+    width: 100%;
+
+    border-radius: 22px;
+
+    cursor: pointer;
+
+    transition: filter .25s ease;
+}
+
+.gallery-image:hover {
+
+    filter: brightness(.92);
+}
+
+.gallery figcaption {
+
+    margin-top: 1rem;
+
+    color: var(--stone);
+
+    font-size: .95rem;
+}
+
+/* =========================
+   Lightbox
+========================= */
+
+#lightbox {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.82);
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 999;
+}
+
+#lightbox img {
+
+    max-width: 90%;
+
+    max-height: 90%;
+}
+
+#close-lightbox {
+
+    position: absolute;
+
+    top: 2rem;
+
+    right: 3rem;
+
+    color: white;
+
+    font-size: 2rem;
+
+    cursor: pointer;
+}
+
+/* =========================
+   Footer
+========================= */
+
+footer {
+
+    text-align: center;
+
+    padding: 3rem;
+
+    color: var(--stone);
+
+    font-size: .95rem;
+}
+
+/* =========================
+   Fade Animation
+========================= */
+
+.fade-in {
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.fade-in.show {
+
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+/* =========================
+   Mobile
+========================= */
+
+@media (max-width: 768px) {
+
+    .vertical-label {
+
+        display: none;
     }
 
-    .hero h1{
-        font-size:2rem;
-    }
-}
+    .site-header {
 
-/* ===== 手机 ===== */
-
-@media(max-width:600px){
-
-    .navbar{
-
-        flex-direction:column;
-        gap:15px;
+        padding-left: 8vw;
+        padding-right: 8vw;
     }
 
-    nav a{
+    .site-header nav {
 
-        margin:0 12px;
+        justify-content: center;
+
+        gap: 1.5rem;
     }
 
-    .gallery{
+    .hero {
 
-        column-count:1;
+        grid-template-columns: 1fr;
+
+        gap: 4rem;
+
+        min-height: auto;
+
+        padding-top: 8rem;
+
+        padding-bottom: 8rem;
     }
 
-    .hero{
+    .hero h1 {
 
-        margin:80px auto;
+        font-size: 3.5rem;
     }
 
-    .hero h1{
+    .subtitle {
 
-        font-size:1.6rem;
+        font-size: 1.15rem;
     }
 
-    .card{
+    .hero-right {
 
-        padding:28px;
+        gap: 1.5rem;
     }
-}
-#langBtn{
 
-    background:none;
+    .page-title h1 {
 
-    border:1px solid #d9cfc0;
+        font-size: 2.8rem;
+    }
 
-    padding:6px 14px;
+    .entry h2,
+    .diary-entry h2 {
 
-    cursor:pointer;
+        font-size: 1.7rem;
+    }
 
-    color:#666;
+    .preview-grid {
 
-    border-radius:6px;
+        grid-template-columns: 1fr;
+    }
 
-    font-size:0.9rem;
-}
+    .gallery {
 
-#langBtn:hover{
+        columns: 1;
+    }
 
-    background:#f2ede4;
+    body {
+
+        font-size: 18px;
+    }
 }
