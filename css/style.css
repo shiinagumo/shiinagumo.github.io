@@ -1,15 +1,44 @@
 /* =========================
+   Video Background
+========================= */
+
+#bg-video {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    object-fit: cover;
+
+    z-index: -3;
+}
+
+.video-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.45);
+
+    z-index: -2;
+}
+/* =========================
    余白の記録
    Wabi-Sabi Theme
 ========================= */
 
 :root {
 
-    --ivory: #f5f2ea;
+    --ivory: #ffffff;
     --earth: #d8cdbd;
     --stone: #b7aea2;
-    --ink: #56524d;
-    --charcoal: #3e3a36;
+     color:white;
+   --charcoal: #3e3a36;
 
 }
 
@@ -31,42 +60,20 @@ body {
 
     font-family: "Noto Sans JP", sans-serif;
 
-    background: var(--ivory);
+    background: transparent;
 
-    color: var(--ink);
+    color: #ffffff;
 
     line-height: 2.2;
 
     letter-spacing: 0.08em;
 
     min-height: 100vh;
-
-    position: relative;
 }
-
 /* =========================
    和紙テクスチャ
 ========================= */
 
-body::before {
-
-    content: "";
-
-    position: fixed;
-
-    inset: 0;
-
-    background-image:
-        url("../images/texture/washi.jpg");
-
-    background-size: cover;
-
-    opacity: 0.05;
-
-    pointer-events: none;
-
-    z-index: -1;
-}
 
 /* =========================
    Header
@@ -161,6 +168,8 @@ body::before {
     line-height: 1.4;
 
     letter-spacing: .18em;
+    text-shadow:
+    0 2px 15px rgba(0,0,0,.4);
 }
 
 .subtitle {
