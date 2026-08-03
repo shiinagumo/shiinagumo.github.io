@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>摄影集 | 光影与字迹</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-[#fcfbf9] text-[#2c2c2c] antialiased">
+
+    <!-- 导航栏 -->
+    <nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center">
+        <a href="index.html" class="text-xl font-medium tracking-widest uppercase">光影与字迹</a>
+        <div class="space-x-8 text-sm tracking-wider font-light">
+            <a href="photography.html" class="text-stone-900 font-normal border-b border-stone-900 pb-1">摄影</a>
+            <a href="essays.html" class="hover:text-stone-500 transition-colors">随笔</a>
+        </div>
+    </nav>
+
+    <!-- 分类筛选栏 -->
+    <div class="max-w-6xl mx-auto px-6 py-8 flex space-x-6 text-xs tracking-widest uppercase text-stone-400 font-light">
+        <button class="text-stone-900 font-medium filter-btn active" onclick="filterGallery('all', this)">全部 / All</button>
+        <button class="hover:text-stone-900 filter-btn" onclick="filterGallery('landscape', this)">风光 / Landscape</button>
+        <button class="hover:text-stone-900 filter-btn" onclick="filterGallery('street', this)">街头 / Street</button>
+    </div>
+
+    <!-- 摄影网格：内容由 JavaScript 动态生成 -->
+    <main class="max-w-6xl mx-auto px-6 pb-24">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" id="gallery"></div>
+    </main>
+
+    <!-- 灯箱（大图预览） -->
+    <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-4 cursor-zoom-out" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="大图" class="max-w-full max-h-[90vh] object-contain">
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="border-t border-stone-100 text-center py-8 text-xs text-stone-400 font-light tracking-widest">
+        © 2026 基于 GitHub Pages 托管. All Rights Reserved.
+    </footer>
+
+    <!-- 动态逻辑脚本 -->
+    <script>
+        // ==========================================
+        // 1. 照片配置数据生成
+        // ==========================================
+        const photos = [];
+        const totalPhotos = 100;   // 照片总张数
+        const ext = '.jpg';        // 图片扩展名（注意：请务必将 HEIC 转换导出为 jpg 使用）
+
+        for (let i = 1; i <= totalPhotos; i++) {
+            // 匹配文件名格式 "1 (1).jpg", "1 (2).jpg" ...
+            const fileName = `1 (${i})${ext}`;
+
+            photos.push({
+                category: i % 2 === 0 ? 'street' : 'landscape', // 奇数风光，偶数街头
+                thumb: `images/thumbs/${fileName}`,
+                full: `images/full/${fileName}`,
+                title: `旅行记忆 #${i}`
+            });
+        }
+
+        // ==========================================
+        // 2. 动态渲染图片列表
+        // ==========================================
+        function renderGallery() {
+            const galleryContainer = document.getElementById('gallery');
+            galleryContainer.innerHTML = photos.map(photo => `
+                <div class="gallery-item ${photo.category} group cursor-pointer" onclick="openLightbox('${photo.full}')">
+                    <div class="overflow-hidden bg-stone-100 aspect-square sm:aspect-[4/5]">
+                        <img src="${photo.thumb}" alt="${photo.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500">
+                    </div>
+                    <p class="mt-2 text-xs font-light text-stone-500 tracking-wide">${photo.title}</p>
+                </div>
+            `).join('');
+        }
+
+        // ==========================================
+        // 3. 分类筛选逻辑
+        // ==========================================
+        function filterGallery(category, btn) {
+            // 切换按钮高亮样式
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('text-stone-900', 'font-medium');
+            });
+            btn.classList.add('text-stone-900', 'font-medium');
+
+            // 筛选图片显示状态
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // ==========================================
+        // 4. 灯箱（图片放大预览）逻辑
+        // ==========================================
+        function openLightbox(imgSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imgSrc;
+            lightbox.classList.remove('hidden');
+            setTimeout(() => lightbox.classList.remove('opacity-0'), 10);
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('opacity-0');
+            setTimeout(() => lightbox.classList.add('hidden'), 300);
+        }
+
+        // 页面 DOM 加载完毕后自动运行渲染
+        document.addEventListener('DOMContentLoaded', renderGallery);
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
