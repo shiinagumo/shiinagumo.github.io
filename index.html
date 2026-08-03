@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>光影与字迹 | 个人空间</title>
+    <title>个人空间</title>
     <!-- 引入 Tailwind CSS 带来现代感的排版 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css">
@@ -12,9 +12,9 @@
 
     <!-- 导航栏 -->
     <nav class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center">
-        <a href="index.html" class="text-xl font-medium tracking-widest uppercase">光影与字迹</a>
+        <a href="index.html" class="text-xl font-medium tracking-widest uppercase">个人站</a>
         <div class="space-x-8 text-sm tracking-wider font-light">
-            <a href="photography.html" class="hover:text-stone-500 transition-colors">摄影</a>
+            <a href="photography.html" class="hover:text-stone-500 transition-colors">照片</a>
             <a href="essays.html" class="hover:text-stone-500 transition-colors">随笔</a>
         </div>
     </nav>
@@ -26,7 +26,7 @@
                 用镜头捕捉转瞬即逝的光线，<br>用文字留住不可复制的瞬间。
             </h1>
             <p class="text-stone-500 text-sm font-light tracking-wide leading-7">
-                欢迎来到我的个人角落。这里存放着我在旅途、日常中定格的画面，以及一些深夜杂感。风格随心，记录即意义。
+                欢迎来到我的个人角落。
             </p>
         </div>
     </header>
@@ -38,22 +38,22 @@
         <!-- 图文混合网格布局 -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <!-- 摄影卡片 1 -->
-            <div class="md:col-span-2 group cursor-pointer overflow-hidden" onclick="openLightbox('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200')">
+            <!-- 摄影卡片 1（改为替换后的本地照片1） -->
+            <div class="md:col-span-2 group cursor-pointer overflow-hidden" onclick="openLightbox('images/photo1.jpg')">
                 <div class="overflow-hidden bg-stone-100 aspect-[16/10]">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1200" alt="山峦暮色" 
+                    <img src="images/photo1.jpg" alt="京都" 
                          class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out">
                 </div>
                 <div class="mt-4 flex justify-between items-baseline">
-                    <h3 class="text-sm font-light tracking-wide">山峦暮色</h3>
-                    <span class="text-xs text-stone-400 font-serif italic">2026 / 关西</span>
+                    <h3 class="text-sm font-light tracking-wide">清水寺</h3>
+                    <span class="text-xs text-stone-400 font-serif italic">2026 / 地点</span>
                 </div>
             </div>
 
             <!-- 随笔卡片 1 -->
             <div class="bg-stone-50 p-8 flex flex-col justify-between border border-stone-100 aspect-square md:aspect-auto">
                 <div>
-                    <span class="text-xs text-stone-400 tracking-wider">随笔 / 2026.04</span>
+                    <span class="text-xs text-stone-400 tracking-wider">随笔 / 2026.07</span>
                     <h3 class="text-lg font-serif font-light my-4 leading-normal hover:text-stone-500">
                         <a href="essays.html">京都的雨，落在石板路上</a>
                     </h3>
@@ -67,26 +67,26 @@
             <!-- 随笔卡片 2 -->
             <div class="bg-stone-50 p-8 flex flex-col justify-between border border-stone-100 aspect-square md:aspect-auto">
                 <div>
-                    <span class="text-xs text-stone-400 tracking-wider">随笔 / 2026.03</span>
+                    <span class="text-xs text-stone-400 tracking-wider">随笔 / 2026.07</span>
                     <h3 class="text-lg font-serif font-light my-4 leading-normal hover:text-stone-500">
-                        <a href="essays.html">关于光影的碎碎念</a>
+                        <a href="essays.html">关西7天6晚</a>
                     </h3>
                     <p class="text-stone-500 text-xs font-light leading-relaxed line-clamp-4">
-                        摄影其实是和时间的物理性对抗。我们按下快门的那一秒，那个光线、那阵风、那个人脸上的表情就永远地死去了，但同时也永远地活在了这块感光元件里。
+                       关西七天六晚路线
                     </p>
                 </div>
                 <a href="essays.html" class="text-xs tracking-widest uppercase font-light text-stone-400 hover:text-stone-600 mt-4 inline-block">Read More →</a>
             </div>
 
-            <!-- 摄影卡片 2 -->
-            <div class="md:col-span-2 group cursor-pointer overflow-hidden" onclick="openLightbox('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200')">
+            <!-- 摄影卡片 2（改为替换后的本地照片2） -->
+            <div class="md:col-span-2 group cursor-pointer overflow-hidden" onclick="openLightbox('images/photo2.jpg')">
                 <div class="overflow-hidden bg-stone-100 aspect-[16/10]">
-                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200" alt="晨雾森林" 
+                    <img src="images/photo2.jpg" alt="大阪" 
                          class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out">
                 </div>
                 <div class="mt-4 flex justify-between items-baseline">
-                    <h3 class="text-sm font-light tracking-wide">晨雾深处</h3>
-                    <span class="text-xs text-stone-400 font-serif italic">2026 / 户外</span>
+                    <h3 class="text-sm font-light tracking-wide">关西</h3>
+                    <span class="text-xs text-stone-400 font-serif italic">2026 / 大阪</span>
                 </div>
             </div>
 
@@ -100,7 +100,7 @@
 
     <!-- 页脚 -->
     <footer class="border-t border-stone-100 text-center py-8 text-xs text-stone-400 font-light tracking-widest">
-        © 2026 基于 GitHub Pages 托管. All Rights Reserved.
+        © 2026  All Rights Reserved.
     </footer>
 
     <script src="script.js"></script>
