@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="从零开始制作日语动漫中日双语字幕：Whisper 识别、AI 翻译、Aegisub 排版与 Python 自动化。">
+<title>日语动漫双语字幕制作指南 — lainvisual</title>
+<style>
+:root{--bg:#f8f8f6;--paper:#fff;--ink:#252b2c;--muted:#717b7d;--line:#e3e7e5;--accent:#54766e;--light:#edf3f0;--code:#202c30}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Noto Sans SC","Microsoft YaHei",sans-serif;line-height:1.85}a{color:inherit}a:hover{color:var(--accent)}.top{height:66px;border-bottom:1px solid var(--line);background:#ffffffd9;backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100vw - 1180px)/2));position:sticky;top:0;z-index:5}.brand{text-decoration:none;letter-spacing:.13em;font-weight:600;font-size:14px}.topright{font-size:13px;color:var(--muted)}.topright a{text-decoration:none;margin-left:20px}.hero{max-width:1100px;margin:auto;padding:88px 26px 68px;border-bottom:1px solid var(--line)}.eyebrow{font-size:12px;letter-spacing:.2em;color:var(--accent);text-transform:uppercase}.hero h1{font-size:clamp(35px,5vw,62px);letter-spacing:-.045em;line-height:1.24;font-weight:500;margin:22px 0}.hero p{font-size:17px;max-width:670px;color:var(--muted)}.hero .meta{font-size:12px;margin-top:32px;color:var(--muted)}.layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:235px minmax(0,1fr);gap:64px;padding:46px 26px 110px}.side{align-self:start;position:sticky;top:100px}.side .small{font-size:11px;letter-spacing:.18em;color:var(--muted);margin:0 0 15px}.side a{display:block;padding:8px 10px;border-left:2px solid transparent;text-decoration:none;font-size:13px;color:#5f6869}.side a.active,.side a:hover{border-color:var(--accent);color:var(--accent);background:#edf3f0}.progress{margin-top:25px;font-size:12px;color:var(--muted)}.bar{height:4px;background:#e0e6e2;border-radius:9px;margin-top:8px;overflow:hidden}.bar span{display:block;background:var(--accent);height:100%;width:0;transition:width .2s}main{min-width:0}section{padding:12px 0 46px;margin-bottom:22px;border-bottom:1px solid var(--line);scroll-margin-top:90px}h2{font-weight:500;font-size:27px;letter-spacing:-.025em;line-height:1.4;margin:0 0 22px}h3{font-size:18px;font-weight:600;margin:30px 0 10px}p,li{font-size:14px;color:#4c5657}li{margin:6px 0}ul,ol{padding-left:23px}.num{font-size:12px;color:var(--accent);letter-spacing:.15em;margin-bottom:8px}.lead{font-size:16px;color:#4b5655}.callout{background:var(--light);padding:20px 24px;border-left:3px solid var(--accent);margin:22px 0;border-radius:0 5px 5px 0}.callout p{margin:0}.flow{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:22px 0}.flow div,.panel{background:var(--paper);border:1px solid var(--line);padding:18px;border-radius:5px}.flow strong{display:block;font-size:13px}.flow small{color:var(--muted);font-size:12px}.links a{display:inline-block;padding:7px 12px;border:1px solid var(--line);border-radius:4px;text-decoration:none;background:#fff;font-size:12px;margin:4px 6px 4px 0}.links a:hover{border-color:var(--accent)}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px;margin:18px 0}th,td{text-align:left;border-bottom:1px solid var(--line);padding:12px 10px;vertical-align:top}th{background:#eef1ef;font-weight:600}pre{background:var(--code);color:#e9f0ed;border-radius:6px;padding:21px 18px;overflow:auto;font-size:12px;line-height:1.65;margin:10px 0 22px}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}p code,li code{background:#e8eeeb;padding:2px 5px;border-radius:3px;color:#375f54;font-size:12px}.codebox{position:relative}.copy{position:absolute;right:10px;top:10px;border:1px solid #6d7a7c;background:#344247;color:#fff;border-radius:4px;padding:5px 10px;cursor:pointer;font-size:11px}.preview{background:linear-gradient(135deg,#344652,#18252e);aspect-ratio:16/8.3;border-radius:6px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:24px;color:#fff;box-shadow:0 12px 35px #1c2a3220}.preview .jp{font-size:16px;text-shadow:0 2px 3px #000}.preview .zh{font-size:24px;font-weight:600;text-shadow:0 2px 3px #000}.check{display:flex;align-items:flex-start;gap:10px;border-bottom:1px solid var(--line);padding:13px 0}.check input{accent-color:var(--accent);margin-top:8px}.check label{font-size:14px;cursor:pointer}.muted{color:var(--muted);font-size:12px}.foot{padding:45px 24px;text-align:center;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.mobile-nav{display:none}@media(max-width:780px){.hero{padding:60px 22px 48px}.layout{display:block;padding:20px 22px 65px}.side{display:none}.mobile-nav{display:block;padding:14px 22px;border-bottom:1px solid var(--line)}.mobile-nav select{width:100%;background:white;border:1px solid var(--line);padding:10px;color:var(--ink)}.flow{grid-template-columns:1fr}.top{padding:0 22px}.topright a{margin-left:12px}.preview .jp{font-size:12px}.preview .zh{font-size:18px}section{padding-top:32px}h2{font-size:24px}}
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="https://lainvisual.com/">LAINVISUAL <span style="font-weight:400;color:#899391">/ NOTES</span></a><div class="topright"><a href="https://lainvisual.com/">返回主页 ↗</a><a href="#start">开始阅读 ↓</a></div></header>
+<div class="hero"><div class="eyebrow">A PERSONAL WORKFLOW / 2026</div><h1>日语动漫<br>双语字幕制作指南。</h1><p>从一段日语视频，到一份可以发布的中日双语字幕。涵盖语音识别、人工听校、AI 翻译、ASS 排版和 Python 自动化的完整实践手册。</p><div class="meta">入门 → 实践 → 自动化　 ·　适合 Windows 11 / NVIDIA GPU，也可使用 CPU　 ·　持续更新的学习笔记</div></div>
+<div class="mobile-nav"><select aria-label="跳转章节" onchange="location.hash=this.value"><option value="start">选择章节</option><option value="tools">01 · 安装工具</option><option value="transcribe">02 · 识别日语</option><option value="translate">03 · AI 翻译</option><option value="aegisub">04 · 双语排版</option><option value="automation">05 · Python 自动化</option><option value="quality">06 · 质检</option><option value="plan">07 · 练习计划</option></select></div>
+<div class="layout"><aside class="side"><div class="small">CONTENTS / 目录</div><nav id="nav"><a href="#start">概览 · 制作流程</a><a href="#tools">01 · 工具安装</a><a href="#transcribe">02 · 日语识别与听校</a><a href="#translate">03 · AI 翻译与审校</a><a href="#aegisub">04 · Aegisub 双语排版</a><a href="#automation">05 · Python 自动化</a><a href="#quality">06 · 质量检查与输出</a><a href="#plan">07 · 两周练习计划</a></nav><div class="progress">练习进度 <span id="count">0 / 7</span><div class="bar"><span id="fill"></span></div></div></aside>
+<main>
+<section id="start"><div class="num">INTRODUCTION</div><h2>一条字幕，是怎样做出来的？</h2><p class="lead">建议先掌握手工校对，再让程序接管重复工作。识别、翻译和排版是三个不同的问题，不能把它们混成一次 AI 操作。</p><div class="flow"><div><strong>01 / 素材准备</strong><small>选择有授权的本地视频</small></div><div><strong>02 / 日语语音识别</strong><small>Whisper → 日语 SRT 初稿</small></div><div><strong>03 / 人工听校</strong><small>核对台词、分句和时间</small></div><div><strong>04 / AI 日译中</strong><small>生成并审校中文字幕</small></div><div><strong>05 / ASS 排版</strong><small>中日双语独立样式</small></div><div><strong>06 / 完整质检</strong><small>检查同步、显示和译文</small></div></div><div class="callout"><p><strong>版权提醒：</strong>字幕翻译本身不代表拥有原片传播权。练习和分享时应使用原创、开放许可或明确授权的素材；公开发布完整动漫视频通常需要权利人许可。</p></div></section>
+<section id="tools"><div class="num">CHAPTER 01</div><h2>安装与配置工具</h2><p>先准备四项核心工具，不必一开始就安装复杂的 AI 工作台。</p><div class="tablewrap"><table><thead><tr><th>工具</th><th>用途</th><th>入门建议</th></tr></thead><tbody><tr><td>Subtitle Edit</td><td>语音识别、调轴、SRT 校对</td><td>先安装</td></tr><tr><td>Aegisub</td><td>ASS 双语样式与精细排版</td><td>必装</td></tr><tr><td>FFmpeg</td><td>提取音频、封装与转码</td><td>必装</td></tr><tr><td>Python / VS Code</td><td>本地识别和批处理脚本</td><td>第二阶段</td></tr></tbody></table></div><div class="links"><a href="https://github.com/SubtitleEdit/subtitleedit" target="_blank" rel="noopener">Subtitle Edit ↗</a><a href="https://aegisub.org/" target="_blank" rel="noopener">Aegisub ↗</a><a href="https://ffmpeg.org/download.html" target="_blank" rel="noopener">FFmpeg ↗</a><a href="https://www.python.org/downloads/" target="_blank" rel="noopener">Python ↗</a><a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code ↗</a></div><h3>Windows 安装顺序</h3><ol><li>安装 Subtitle Edit，打开视频并熟悉字幕列表、波形和保存 SRT 的方式。</li><li>安装 Aegisub，在菜单 <code>Subtitles → Styles Manager</code> 中查看样式管理器。</li><li>安装 FFmpeg，并把其 <code>bin</code> 目录添加到系统 PATH；在 PowerShell 中运行 <code>ffmpeg -version</code> 验证。</li><li>安装 Python 3 与 VS Code，在 PowerShell 中运行 <code>python --version</code> 验证。</li></ol><div class="codebox"><button class="copy">复制</button><pre><code>mkdir anime-sub
+cd anime-sub
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install faster-whisper pysubs2</code></pre></div><p class="muted">如果 PowerShell 找不到 python，请检查安装选项和 PATH；如果 GPU 配置较复杂，可以先用 CPU 完成第一轮。</p></section>
+<section id="transcribe"><div class="num">CHAPTER 02</div><h2>Whisper 日语识别与人工听校</h2><h3>使用 Subtitle Edit</h3><ol><li>打开本地视频文件。</li><li>在 <code>Video → Speech to text</code> 中选择可用的 Whisper 识别引擎。</li><li>设置语言为 Japanese，任务为 Transcribe（转录），不要选择翻译成英语。</li><li>首次按软件提示下载模型，先从可流畅运行的模型测试。</li><li>识别完成后保存为 <code>episode.ja.raw.srt</code>。</li></ol><h3>原文检查清单</h3><p>对照音频逐条检查：否定形式、助词、角色称呼、重叠说话、喊叫、背景音乐误识别，以及一句话被切成多个不自然片段的情况。校对后另存为 <code>episode.ja.checked.srt</code>。</p><div class="codebox"><button class="copy">复制</button><pre><code>1
+00:00:03,200 --> 00:00:05,400
+今日は何をするつもり？
+
+2
+00:00:05,800 --> 00:00:07,600
+まだ決めてないよ。</code></pre></div><div class="callout"><p>不要跳过日语听校。翻译模型可能把错误的日文识别结果翻译得非常流畅，但那并不代表它忠实于原台词。</p></div></section>
+<section id="translate"><div class="num">CHAPTER 03</div><h2>AI 翻译：从日语 SRT 到中文 SRT</h2><p>最容易入门的方法是把已经校对的 SRT 按剧情场景分批交给 ChatGPT。每批先试 30～60 条，避免长输出造成漏行或错位。</p><h3>可直接复制的翻译提示词</h3><div class="codebox"><button class="copy">复制</button><pre><code>你是一名专业的日语动漫字幕翻译。
+请把以下日语 SRT 翻译成自然、准确的简体中文。
+
+要求：
+1. 严格保留每条字幕编号、时间轴与条目数量。
+2. 中文符合人物性格、语气与上下文，避免机械直译。
+3. 处理敬语、口癖、省略、双关和文化背景时忠实原意。
+4. 人名、地名和专有名词保持统一。
+5. 不编造原文没有的信息。
+6. 先输出完整中文 SRT，再列出需要人工复核的编号。
+
+角色与术语表：（在这里填写）
+前情概要：（在这里填写）
+
+以下是日语 SRT：
+（在这里粘贴字幕）</code></pre></div><h3>翻译示例</h3><div class="tablewrap"><table><thead><tr><th>日语</th><th>可能的中文字幕</th></tr></thead><tbody><tr><td>今日は何をするつもり？</td><td>今天打算做什么？</td></tr><tr><td>まだ決めてないよ。</td><td>还没决定呢。</td></tr><tr><td>しょうがないな。</td><td>真拿你没办法。</td></tr></tbody></table></div><p>翻译完成后另存为 <code>episode.zh.srt</code>。应检查中文是否与日语逐条对应、人物称呼是否统一、是否出现无依据的补充信息。像 <code>しょうがないな</code> 这样的表达需要根据语境决定译法。</p><h3>两轮审校</h3><ol><li><strong>准确性：</strong>对照日文检查漏译、误译、否定、人物关系。</li><li><strong>可读性：</strong>压缩冗长句子，优化断行，保留原有语气。</li></ol></section>
+<section id="aegisub"><div class="num">CHAPTER 04</div><h2>Aegisub：制作双语 ASS 字幕</h2><p>建议采用日语在上、中文在下的双层字幕。日文和中文分别作为独立 ASS 事件，使用不同样式，后续修改更加方便。</p><div class="preview"><div class="jp">今日は何をするつもり？</div><div class="zh">今天打算做什么？</div></div><p class="muted">样式示意，实际字体大小取决于 ASS 脚本分辨率和播放器。</p><h3>手工操作</h3><ol><li>在 Aegisub 中打开 <code>episode.ja.checked.srt</code>，再通过 Video 菜单打开视频、通过 Audio 菜单载入音频。</li><li>在 <code>Subtitles → Styles Manager</code> 新建 <code>JP</code> 与 <code>ZH</code> 两个样式。</li><li>日文样式使用较小字号，中文使用较大字号；均使用底部居中、描边与适当阴影。</li><li>复制日语字幕事件，保持时间轴一致，将复制的事件改为 <code>ZH</code> 样式并替换为对应中文。</li><li>保存为 <code>episode.bilingual.ass</code>，播放检查。</li></ol><div class="tablewrap"><table><thead><tr><th>设置</th><th>JP</th><th>ZH</th></tr></thead><tbody><tr><td>字体</td><td>Noto Sans JP</td><td>思源黑体</td></tr><tr><td>字号</td><td>36</td><td>52</td></tr><tr><td>对齐</td><td>底部居中</td><td>底部居中</td></tr><tr><td>Margin V</td><td>105</td><td>35</td></tr><tr><td>描边</td><td>2</td><td>3</td></tr></tbody></table></div><p class="muted">上表以 PlayResX=1920、PlayResY=1080 为起点。若出现重叠，请根据字体实际行高增加两层之间的距离。</p><div class="callout"><p><strong>效率建议：</strong>几百条字幕不要逐条复制。下一章的脚本能把已经对齐的日文和中文 SRT 自动合并成双语 ASS，然后只在 Aegisub 中做视觉微调。</p></div></section>
+<section id="automation"><div class="num">CHAPTER 05</div><h2>Python：把重复工作交给程序</h2><h3>① 本地生成日语 SRT</h3><p>把获得授权的 <code>episode.mp4</code> 放到项目目录，保存以下脚本为 <code>transcribe.py</code>。</p><div class="codebox"><button class="copy">复制</button><pre><code>from faster_whisper import WhisperModel
+
+model = WhisperModel("medium", device="cpu", compute_type="int8")
+segments, info = model.transcribe(
+    "episode.mp4", language="ja", task="transcribe",
+    beam_size=5, vad_filter=False
+)
+
+def srt_time(seconds):
+    ms = round(seconds * 1000)
+    h, ms = divmod(ms, 3600000)
+    m, ms = divmod(ms, 60000)
+    s, ms = divmod(ms, 1000)
+    return f"{h:02}:{m:02}:{s:02},{ms:03}"
+
+with open("episode.ja.raw.srt", "w", encoding="utf-8") as f:
+    for i, seg in enumerate(segments, 1):
+        f.write(f"{i}\n{srt_time(seg.start)} --> {srt_time(seg.end)}\n")
+        f.write(seg.text.strip() + "\n\n")
+print("识别初稿完成，请人工听校。")</code></pre></div><div class="codebox"><button class="copy">复制</button><pre><code>.\.venv\Scripts\python.exe transcribe.py</code></pre></div><h3>② 合并中日双语 ASS</h3><p>准备好 <code>episode.ja.checked.srt</code> 和 <code>episode.zh.srt</code>，保存以下脚本为 <code>merge_ass.py</code>。</p><div class="codebox"><button class="copy">复制</button><pre><code>import pysubs2
+
+ja = pysubs2.load("episode.ja.checked.srt", encoding="utf-8")
+zh = pysubs2.load("episode.zh.srt", encoding="utf-8")
+if len(ja) != len(zh):
+    raise ValueError("字幕数量不同，请检查漏译或合并条目")
+
+out = pysubs2.SSAFile()
+out.info["PlayResX"] = "1920"
+out.info["PlayResY"] = "1080"
+
+for name, font, size, margin, outline in [
+    ("JP", "Noto Sans JP", 36, 105, 2),
+    ("ZH", "Source Han Sans SC", 52, 35, 3),
+]:
+    style = pysubs2.SSAStyle()
+    style.fontname = font
+    style.fontsize = size
+    style.alignment = 2
+    style.marginv = margin
+    style.outline = outline
+    style.shadow = 1
+    out.styles[name] = style
+
+for index, (j, z) in enumerate(zip(ja, zh), 1):
+    if abs(j.start-z.start) > 100 or abs(j.end-z.end) > 100:
+        raise ValueError(f"第 {index} 条时间轴不匹配")
+    jp_line = j.copy()
+    jp_line.style = "JP"
+    zh_line = z.copy()
+    zh_line.style = "ZH"
+    out.events.extend([jp_line, zh_line])
+
+out.save("episode.bilingual.ass")
+print("生成 episode.bilingual.ass")</code></pre></div><div class="codebox"><button class="copy">复制</button><pre><code>.\.venv\Scripts\python.exe merge_ass.py</code></pre></div><h3>③ 下一阶段的自动化方向</h3><p>等熟悉完整制作流程后，再开发 <code>translate.py</code>：通过翻译模型 API 分批翻译、用字幕编号锁定原始时间轴、自动检查条目数量，并把不确定的句子标记为“需要人工复核”。不要让翻译模型自行决定时间轴。</p><div class="callout"><p>以上脚本是可运行的基础版本，不负责判断翻译是否准确、台词是否遗漏，也不能处理复杂的重叠对白排版。每次输出都需要人工检查。</p></div></section>
+<section id="quality"><div class="num">CHAPTER 06</div><h2>质检与最终交付</h2><p>最终至少保留日语原文、中文译文、双语 ASS 三份文件。对每集进行一次从头到尾的完整播放检查。</p><ul><li><strong>语言：</strong>人名、口癖、敬语、否定表达与剧情含义正确。</li><li><strong>时间：</strong>字幕没有明显提前、延迟、错位或突兀闪烁。</li><li><strong>画面：</strong>两行字幕不互相覆盖，不挡住关键视觉信息。</li><li><strong>技术：</strong>UTF-8 编码、字幕样式、字体回退和播放器兼容性正常。</li><li><strong>版权：</strong>确认分享方式符合素材许可，不擅自公开传播未授权的原片。</li></ul><h3>推荐项目结构</h3><div class="codebox"><button class="copy">复制</button><pre><code>AnimeSubs/
+├── tools/
+│   ├── transcribe.py
+│   └── merge_ass.py
+├── glossary/
+│   └── names.csv
+└── projects/
+    └── episode01/
+        ├── episode.mp4
+        ├── episode.ja.raw.srt
+        ├── episode.ja.checked.srt
+        ├── episode.zh.srt
+        └── episode.bilingual.ass</code></pre></div><p class="muted">建议保留原始识别稿与校对稿，方便定位错误和追踪修改。</p></section>
+<section id="plan"><div class="num">CHAPTER 07</div><h2>两周入门练习</h2><p>勾选完成的任务。浏览器会在本机保存进度，不需要账号。</p><div id="checklist"><div class="check"><input id="t0" type="checkbox"><label for="t0">第 1～2 天：安装软件，确认可以打开视频与字幕</label></div><div class="check"><input id="t1" type="checkbox"><label for="t1">第 3～4 天：识别 3～5 分钟日语素材，人工听校</label></div><div class="check"><input id="t2" type="checkbox"><label for="t2">第 5～6 天：AI 初译并逐句审校</label></div><div class="check"><input id="t3" type="checkbox"><label for="t3">第 7 天：在 Aegisub 中做出第一份双语 ASS</label></div><div class="check"><input id="t4" type="checkbox"><label for="t4">第 8～10 天：练习样式、波形调轴与断行</label></div><div class="check"><input id="t5" type="checkbox"><label for="t5">第 11～12 天：运行本地 Whisper 和合并脚本</label></div><div class="check"><input id="t6" type="checkbox"><label for="t6">第 13～14 天：完整制作第二段短视频并归档</label></div></div><div class="callout" style="margin-top:30px"><p>完成这七项后，你就有了一个可重复使用的字幕制作流程。之后再考虑 AI API 批量翻译、术语库和自动质量检测。</p></div></section>
+</main></div><footer class="foot">LAINVISUAL · Personal notes on language & technology<br>本页为个人学习教程 · <a href="https://lainvisual.com/">返回 lainvisual.com</a></footer>
+<script>
+document.querySelectorAll('.copy').forEach(button=>button.addEventListener('click',async()=>{const code=button.parentElement.querySelector('code').innerText;try{await navigator.clipboard.writeText(code);button.textContent='已复制 ✓';setTimeout(()=>button.textContent='复制',1700)}catch{button.textContent='请手动复制';setTimeout(()=>button.textContent='复制',1700)}}));
+const checks=[...document.querySelectorAll('#checklist input')];try{const saved=JSON.parse(localStorage.getItem('lainvisual-subtitle-progress')||'[]');checks.forEach((c,i)=>c.checked=!!saved[i])}catch{}function update(){const n=checks.filter(c=>c.checked).length;document.getElementById('count').textContent=n+' / '+checks.length;document.getElementById('fill').style.width=(n/checks.length*100)+'%';try{localStorage.setItem('lainvisual-subtitle-progress',JSON.stringify(checks.map(c=>c.checked)))}catch{}}checks.forEach(c=>c.addEventListener('change',update));update();
+const nav=[...document.querySelectorAll('#nav a')];const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){nav.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-110px 0px -65% 0px'});document.querySelectorAll('main section').forEach(s=>observer.observe(s));
+</script>
+</body></html>
